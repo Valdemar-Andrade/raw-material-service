@@ -1,8 +1,8 @@
 package com.projeto.rawmaterialservice.service;
 
-import com.projeto.rawmaterialservice.entity.RawMaterial;
+import com.projeto.rawmaterialservice.dto.BaseEvent;
 
 public interface EventPublisher {
 
-    void sendRawMaterialEvent(RawMaterial material);
+    void sendRawMaterialEvent(BaseEvent materialEvent);
 }

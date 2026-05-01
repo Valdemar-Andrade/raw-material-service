@@ -1,28 +1,41 @@
 package com.projeto.rawmaterialservice.service;
 
+import com.projeto.rawmaterialservice.dto.BaseEvent;
+import com.projeto.rawmaterialservice.dto.RawMaterialPayload;
 import com.projeto.rawmaterialservice.model.PipelineStep;
 import com.projeto.rawmaterialservice.model.ProductionPipeline;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PipelineService {
+    private final EventPublisher eventPublisher;
 
-    public void execute(ProductionPipeline  pipeline) {
-        // Simula a execução do pipeline
+    public PipelineService(EventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
+
+    @Async
+    public void execute(ProductionPipeline pipeline, RawMaterialPayload payload) {
         for (PipelineStep step : pipeline.getSteps()) {
-            System.out.println("Executando etapa: " + step.getName() + " por " + step.getDurationMs() + " ms");
-
             try {
                 Thread.sleep(step.getDurationMs());
+                System.out.println("Etapa: " + step.getName() + " concluída.");
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                System.out.println("Pipeline interrompido");
                 return;
             }
         }
 
-        System.out.println("Pipeline " + pipeline.getName() + " concluído");
+        // Criando o envelope final para o Kafka
+        BaseEvent event = BaseEvent.create(
+                "RAW_MATERIAL_EXTRACTED", // Evento obrigatório
+                payload.producer().service(),
+                "processing-service", // Próximo serviço na cadeia
+                payload
+        );
+
+        eventPublisher.sendRawMaterialEvent(event);
+        System.out.println("[INFO] Matéria-prima enviada para a próxima etapa da cadeia.");
     }
 }

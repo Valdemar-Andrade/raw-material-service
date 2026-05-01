@@ -1,7 +1,6 @@
 package com.projeto.rawmaterialservice.kafka;
 
 import com.projeto.rawmaterialservice.dto.BaseEvent;
-import com.projeto.rawmaterialservice.entity.RawMaterial;
 import com.projeto.rawmaterialservice.service.EventPublisher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -28,15 +27,7 @@ public class KafkaEventPublisher implements EventPublisher {
     }
 
     @Override
-    public void sendRawMaterialEvent(RawMaterial material) {
-
-        BaseEvent event = BaseEvent.create(
-                "RAW_MATERIAL_EXTRACTED",
-                serviceName,
-                "component-service",
-                material
-        );
-
+    public void sendRawMaterialEvent(BaseEvent event) {
         kafkaTemplate.send(topic, event);
     }
 }
