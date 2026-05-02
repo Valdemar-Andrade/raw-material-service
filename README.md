@@ -115,7 +115,7 @@ docker-compose up --build
 - Simulação de pipeline de produção com latência
 - Isolamento do serviço e propriedade dos dados
 
-## Serviço de Processamento:
+## Outros Serviços:
 - [processing-service](https://github.com/Valdemar-Andrade/processing-service.git)
 
 ## 👤 Autor
