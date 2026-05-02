@@ -10,7 +10,7 @@ Este projeto simula um pipeline de produção industrial real, onde serviços in
 
 Fluxo do pipeline:
 
-Matéria-Prima → Produção de Componentes → Montagem do Produto
+Matéria-Prima → Processamento → Produção de Componentes → Montagem do Produto
 
 Cada etapa opera como um microsserviço isolado, comunicando através de eventos Kafka.
 
@@ -36,7 +36,7 @@ Sem este serviço, toda a cadeia de produção não pode ser iniciada.
 ---
 
 ## 🔄 Posição no Pipeline
-[ Serviço de Matéria-Prima ] → [ Serviço de Componentes ] → [ Serviço de Montagem ]
+[ Serviço de Matéria-Prima ] → [ Serviço de Processamento ] → [ Serviço de Componentes ] → [ Serviço de Montagem ]
 
 ---
 
@@ -48,7 +48,7 @@ Sem este serviço, toda a cadeia de produção não pode ser iniciada.
 
 ### Estrutura do Evento
 
-```json
+```
 {
 
 "eventId": "uuid",
@@ -69,57 +69,56 @@ Sem este serviço, toda a cadeia de produção não pode ser iniciada.
 }
 }
 ```
-⏱️ Pipeline de Produção (Simulação de Latência)
+
+# ⏱️ Pipeline de Produção (Simulação de Latência)
 
 A produção não é instantânea. Cada pedido passa por um pipeline com durações definidas.
 
 Exemplo
+```
 [
 { "nome": "EXTRAÇÃO", "duraçãoMs": 10000 },
 
 { "nome": "TRANSPORTE", "duraçãoMs": 5000 }
 ]
+```
 
 Isto simula atrasos industriais reais.
 
-🌐 API
-Criar Matéria-Prima
+# 🔄 Fluxo Interno
+- Receber pedido HTTP
+- Validar dados de entrada
+- Executar pipeline de produção (com atraso)
+- Persistir matéria-prima na base de dados
+- Publicar evento Kafka
 
-POST /matéria-prima
-
-{
-
-"nome": "Ferro",
-
-"quantidade": 10
-}
-
-🔄 Fluxo Interno
-Receber pedido HTTP
-Validar dados de entrada
-Executar pipeline de produção (com atraso)
-Persistir matéria-prima na base de dados
-Publicar evento Kafka
-
-🗄️ Propriedade dos Dados
+# 🗄️ Propriedade dos Dados
 
 Este serviço segue as melhores práticas de micro-serviços:
 
-Base de dados própria
-Sem acesso direto aos dados de outros serviços
-Comunicação estritamente via eventos
-🧱 Tecnologias
-Java + Spring Boot
-Apache Kafka
-PostgreSQL
-Docker
+- Base de dados própria
+- Sem acesso direto aos dados de outros serviços
+- Comunicação estritamente via eventos
 
-▶️ Executar o Serviço
+# 🧱 Tecnologias
+- Java + Spring Boot
+- Apache Kafka
+- PostgreSQL
+- Docker
+
+# ▶️ Executar o Serviço
 docker-compose up --build
 
-🧠 Conceitos-chave Demonstrados
-Arquitetura orientada a eventos
-Design de sistemas distribuídos
-Simulação de pipeline de produção com latência
-Isolamento do serviço e propriedade dos dados
+# 🧠 Conceitos-chave Demonstrados
+- Arquitetura orientada a eventos
+- Design de sistemas distribuídos
+- Simulação de pipeline de produção com latência
+- Isolamento do serviço e propriedade dos dados
+
+## Serviço de Processamento:
+- [processing-service](https://github.com/Valdemar-Andrade/processing-service.git)
+
+## 👤 Autor
+- GitHub: [@Valdemar-Andrade]
+- LinkedIn: [Valdemar Valdemar](https://www.linkedin.com/in/valdemar-andrade-8b0b45189)
 
