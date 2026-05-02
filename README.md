@@ -70,7 +70,7 @@ Sem este serviço, toda a cadeia de produção não pode ser iniciada.
 }
 ```
 
-# ⏱️ Pipeline de Produção (Simulação de Latência)
+## ⏱️ Pipeline de Produção (Simulação de Latência)
 
 A produção não é instantânea. Cada pedido passa por um pipeline com durações definidas.
 
@@ -85,14 +85,14 @@ Exemplo
 
 Isto simula atrasos industriais reais.
 
-# 🔄 Fluxo Interno
+## 🔄 Fluxo Interno
 - Receber pedido HTTP
 - Validar dados de entrada
 - Executar pipeline de produção (com atraso)
 - Persistir matéria-prima na base de dados
 - Publicar evento Kafka
 
-# 🗄️ Propriedade dos Dados
+## 🗄️ Propriedade dos Dados
 
 Este serviço segue as melhores práticas de micro-serviços:
 
@@ -100,16 +100,16 @@ Este serviço segue as melhores práticas de micro-serviços:
 - Sem acesso direto aos dados de outros serviços
 - Comunicação estritamente via eventos
 
-# 🧱 Tecnologias
+## 🧱 Tecnologias
 - Java + Spring Boot
 - Apache Kafka
 - PostgreSQL
 - Docker
 
-# ▶️ Executar o Serviço
+## ▶️ Executar o Serviço
 docker-compose up --build
 
-# 🧠 Conceitos-chave Demonstrados
+## 🧠 Conceitos-chave Demonstrados
 - Arquitetura orientada a eventos
 - Design de sistemas distribuídos
 - Simulação de pipeline de produção com latência
