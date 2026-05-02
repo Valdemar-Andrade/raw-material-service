@@ -106,7 +106,7 @@ Este serviço segue as melhores práticas de micro-serviços:
 - PostgreSQL
 - Docker
 
-## ▶️ Executar o Serviço
+## Executar o Serviço
 docker-compose up --build
 
 ## 🧠 Conceitos-chave Demonstrados
@@ -120,5 +120,5 @@ docker-compose up --build
 
 ## 👤 Autor
 - GitHub: [@Valdemar-Andrade]
-- LinkedIn: [Valdemar Valdemar](https://www.linkedin.com/in/valdemar-andrade-8b0b45189)
+- LinkedIn: [Valdemar Andrade](https://www.linkedin.com/in/valdemar-andrade-8b0b45189)
 
