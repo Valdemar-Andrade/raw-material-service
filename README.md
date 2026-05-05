@@ -117,8 +117,9 @@ docker-compose up --build
 
 ## Outros Serviços:
 - [processing-service](https://github.com/Valdemar-Andrade/processing-service.git)
+- [component-service](https://github.com/Valdemar-Andrade/component-service.git)
 
-## 👤 Autor
+## 👤 Desenvolvedor
 - GitHub: [@Valdemar-Andrade]
 - LinkedIn: [Valdemar Andrade](https://www.linkedin.com/in/valdemar-andrade-8b0b45189)
 
