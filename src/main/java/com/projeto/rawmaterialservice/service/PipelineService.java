@@ -36,6 +36,6 @@ public class PipelineService {
         );
 
         eventPublisher.sendRawMaterialEvent(event);
-        System.out.println("[INFO] Matéria-prima enviada para a próxima etapa da cadeia.");
+        System.out.println("[raw-material-service] Matéria-prima enviada para a próxima etapa da cadeia.");
     }
 }
