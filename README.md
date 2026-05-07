@@ -1,52 +1,52 @@
-# Serviço de Matéria-Prima
+# Raw Material Service
 
-Parte de um **Simulador de Pipeline Industrial da Indústria 4.0** distribuído, construído com arquitetura de micro-serviços orientada a eventos.
-
----
-
-## 🧠 Visão Geral do Sistema
-
-Este projeto simula um pipeline de produção industrial real, onde serviços independentes colaboram para produzir bens.
-
-Fluxo do pipeline:
-
-Matéria-Prima → Processamento → Produção de Componentes → Montagem do Produto
-
-Cada etapa opera como um microsserviço isolado, comunicando através de eventos Kafka.
+Part of a distributed **Industry 4.0 Industrial Pipeline Simulator**, built with an event-driven microservices architecture.
 
 ---
 
-## 🎯 Função deste Serviço
+## 🧠 System Overview
 
-O **Serviço Matéria-Prima** é o ponto de entrada do pipeline de produção.
+This project simulates a real industrial production pipeline, where independent services collaborate to produce goods.
 
-É responsável por simular a extração de matérias-primas (por exemplo, ferro, látex, areia) que serão utilizadas pelos serviços subsequentes.
+Pipeline Flow:
 
-Sem este serviço, toda a cadeia de produção não pode ser iniciada.
+Raw Material → Processing → Component Production → Product Assembly
 
----
-
-## ⚙️ Responsabilidades
-
-- Simular a extração de matéria-prima utilizando pipelines baseados no tempo
-- Validar os pedidos de produção recebidos
-- Persistir os materiais extraídos
-- Publicar eventos no Kafka para processamento subsequente
+Each step operates as an isolated microservice, communicating through Kafka events.
 
 ---
 
-## 🔄 Posição no Pipeline
-[ Serviço de Matéria-Prima ] → [ Serviço de Processamento ] → [ Serviço de Componentes ] → [ Serviço de Montagem ]
+## 🎯 Function of this Service
+
+The **Raw Material Service** is the entry point of the production pipeline.
+
+It is responsible for simulating the extraction of raw materials (e.g., iron, latex, sand) that will be used by subsequent services.
+
+Without this service, the entire production chain cannot be initiated.
 
 ---
 
-## 📡 Comunicação Orientada a Eventos
+## ⚙️ Responsibilities
 
-### Eventos Produzidos
+- Simulate raw material extraction using time-based pipelines
+- Validate received production orders
+- Persist extracted materials
+- Publish events in Kafka for subsequent processing
+
+---
+
+## 🔄 Pipeline Position
+[Raw Material Service] → [Processing Service] → [Component Service] → [Assembly Service]
+
+---
+
+## 📡 Event-Driven Communication
+
+### Events Produced
 
 - `RAW_MATERIAL_EXTRACTED`
 
-### Estrutura do Evento
+### Event Structure
 
 ```
 {
@@ -62,64 +62,64 @@ Sem este serviço, toda a cadeia de produção não pode ser iniciada.
 "targetService": "component-service",
 
 "payload": {
-"nome": "Ferro",
+"name": "Iron",
 
-"quantidade": 10
+"quantity": 10
 
 }
 }
 ```
 
-## ⏱️ Pipeline de Produção (Simulação de Latência)
+## ⏱️ Production Pipeline (Latency Simulation)
 
-A produção não é instantânea. Cada pedido passa por um pipeline com durações definidas.
+Production is not instantaneous. Each request goes through a pipeline with defined durations.
 
-Exemplo
+Example
+
 ```
 [
-{ "nome": "EXTRAÇÃO", "duraçãoMs": 10000 },
+{ "name": "EXTRACTION", "durationMs": 10000 },
 
-{ "nome": "TRANSPORTE", "duraçãoMs": 5000 }
-]
+{ "name": "TRANSPORT", "durationMs": 5000 }
+
 ```
 
-Isto simula atrasos industriais reais.
+This simulates real industrial delays.
 
-## 🔄 Fluxo Interno
-- Receber pedido HTTP
-- Validar dados de entrada
-- Executar pipeline de produção (com atraso)
-- Persistir matéria-prima na base de dados
-- Publicar evento Kafka
+## 🔄 Internal Flow
+- Receive HTTP request
+- Validate input data
+- Execute production pipeline (with delay)
+- Persist raw material in the database
+- Publish Kafka event
 
-## 🗄️ Propriedade dos Dados
+## 🗄️ Data Ownership
 
-Este serviço segue as melhores práticas de micro-serviços:
+This service follows microservices best practices:
 
-- Base de dados própria
-- Sem acesso direto aos dados de outros serviços
-- Comunicação estritamente via eventos
+- Own database
+- No direct access to data from other services
+- Communication strictly via events
 
-## 🧱 Tecnologias
+## 🧱 Technologies
 - Java + Spring Boot
 - Apache Kafka
 - PostgreSQL
 - Docker
 
-## Executar o Serviço
+## Running the Service
 docker-compose up --build
 
-## 🧠 Conceitos-chave Demonstrados
-- Arquitetura orientada a eventos
-- Design de sistemas distribuídos
-- Simulação de pipeline de produção com latência
-- Isolamento do serviço e propriedade dos dados
+## 🧠 Key Concepts Demonstrated
+- Event-driven architecture
+- Distributed systems design
+- Simulation of a production pipeline with latency
+- Service isolation and data ownership
 
-## Outros Serviços:
+## Other Services:
 - [processing-service](https://github.com/Valdemar-Andrade/processing-service.git)
 - [component-service](https://github.com/Valdemar-Andrade/component-service.git)
 
-## 👤 Desenvolvedor
+## 👤 Developer
 - GitHub: [@Valdemar-Andrade]
 - LinkedIn: [Valdemar Andrade](https://www.linkedin.com/in/valdemar-andrade-8b0b45189)
-
