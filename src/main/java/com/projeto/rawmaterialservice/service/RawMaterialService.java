@@ -50,13 +50,11 @@ public class RawMaterialService {
                 "RAW_MATERIAL",
                 new ProducerDTO(serviceName, "Mining-Plant-01"),
                 new PurposeDTO("CAR", request.targetComponent(), "Extração base para componentes"),
-                List.of() // Raw material não tem componentes filhos
+                List.of()
         );
 
-        // Define o Pipeline com tempos (EXTRACTION, INITIAL_PROCESSING, PACKAGING)
         ProductionPipeline pipeline = buildDefaultPipeline();
 
-        // Inicia execução assíncrona (O evento será enviado ao fim do tempo)
         pipelineService.execute(pipeline, payload);
     }
 

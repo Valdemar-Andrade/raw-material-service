@@ -41,7 +41,6 @@ public class AutomatedExtractionTask {
     private RawMaterialRequest generateRandomMaterialForCar() {
         String materialName = allowedMaterials.get(new Random().nextInt(allowedMaterials.size()));
 
-        // Define o targetComponent com base no material
         String targetComponent = switch (materialName) {
             case "IRON" -> "ENGINE_BLOCK";
             case "LATEX" -> "TIRES";

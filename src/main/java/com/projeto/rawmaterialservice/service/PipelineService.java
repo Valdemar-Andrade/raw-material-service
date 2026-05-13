@@ -27,11 +27,10 @@ public class PipelineService {
             }
         }
 
-        // Criando o envelope final para o Kafka
         BaseEvent event = BaseEvent.create(
-                "RAW_MATERIAL_EXTRACTED", // Evento obrigatório
+                "RAW_MATERIAL_EXTRACTED",
                 payload.producer().service(),
-                "processing-service", // Próximo serviço na cadeia
+                "processing-service",
                 payload
         );
 
